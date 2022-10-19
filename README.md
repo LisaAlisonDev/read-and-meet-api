@@ -32,6 +32,11 @@ et l'alimenter en données de test :
    - php artisan db:seed
 ```
 
+A ne pas oublier pour éviter tout problème d'authentification :
+```
+   - php artisan passport:install
+```
+
 Pour lancer l'application sur un serveur local :
 ```
    - php artisan serve
