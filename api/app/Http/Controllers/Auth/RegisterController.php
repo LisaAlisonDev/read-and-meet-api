@@ -16,7 +16,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request, UserHelper $userHelper, UserProfileController $userProfileController): \Illuminate\Http\JsonResponse
     {
-        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)){
+        if (!$userHelper->checkValidEmail($request->email)){
             return response()->json(['message' => 'Veuillez choisir une adresse email valide.', 'token' => null], 200);
         }
 

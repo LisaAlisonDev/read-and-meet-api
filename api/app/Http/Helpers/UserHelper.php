@@ -1,11 +1,18 @@
 <?php
 namespace App\Http\Helpers;
 
-use App\Http\Controllers\User\UserProfileController;
 use App\Models\User;
 
 class UserHelper {
 
+    public function checkValidEmail($email) : bool
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+
+        return true;
+    }
 
     public function checkDuplicateEmail($email)
     {
