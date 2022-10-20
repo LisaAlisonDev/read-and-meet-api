@@ -3,7 +3,10 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Post\CreatePostController;
+use App\Http\Controllers\Post\PostsController;
+use App\Http\Controllers\Post\RemovePostController;
+use App\Http\Controllers\Post\UpdatePostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +26,11 @@ Route::post('/inscription', [RegisterController::class, 'register']);
 Route::post('/connexion', [LoginController::class, 'login'])->name('login');
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('/post', [PostController::class, 'store'])->name('create');
-    Route::put('/post/{id}', [PostController::class, 'update'])->name('update');
-    Route::post('/post/{id}',[PostController::class, 'remove'])->name('remove');
-    Route::get('/posts', [PostController::class, 'index'])->name('index');
+    Route::post('/post', [CreatePostController::class, 'store'])->name('create');
+    Route::put('/post/{id}', [UpdatePostController::class, 'update'])->name('update');
+    Route::post('/post/{id}',[RemovePostController::class, 'remove'])->name('remove');
+    Route::get('/posts', [PostsController::class, 'index'])->name('index');
     //Route::group(['prefix' => 'posts'], function() {});
-
 });
 
 
