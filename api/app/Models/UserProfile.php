@@ -22,6 +22,4 @@ class UserProfile extends Model
         'visibility',
     ];
 
-
-
 }
