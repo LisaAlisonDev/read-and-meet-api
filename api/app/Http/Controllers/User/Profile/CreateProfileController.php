@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\User\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
 
-class UserProfileController extends Controller
+class CreateProfileController extends Controller
 {
     /**
-     * Registration
+     * Creation of user profile
      */
     public function store($id): \Illuminate\Http\JsonResponse
     {

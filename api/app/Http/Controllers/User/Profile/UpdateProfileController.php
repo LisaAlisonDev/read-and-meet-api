@@ -1,28 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\User\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Throwable;
 
 
-class UpdatePostController extends Controller
+class UpdateProfileController extends Controller
 {
     /**
-     * Update a post
+     * Update an user profile
      */
     public function update (Request $request, $id): \Illuminate\Http\JsonResponse
     {
         try {
-            $post = DB::table('posts')
+            $post = DB::table('userProfiles')
                 ->where('id', $id)
                 ->update([
                     'user_id' => Auth::id(),
-                    'title' => $request->title,
+                    'favourite_book' => $request->title,
                     'description' => $request->description,
                     'visibility' => $request->visibility,
                 ]);
@@ -30,8 +29,7 @@ class UpdatePostController extends Controller
             return response()->json([
                 'message' => 'Annonce mise à jour avec succès!',
                 'data' => $post], 200);
-        } catch (Throwable $e) {
-            report($e);
+        } catch (\Error) {
             return response()->json([
                 'message' => 'Une erreur est survenue lors de la mise à jour de votre annonce!',
                 'token' => null], 500);

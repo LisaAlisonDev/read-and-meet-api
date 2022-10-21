@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 
 class PostsController extends Controller
@@ -21,7 +22,8 @@ class PostsController extends Controller
         try {
             $posts = DB::table('posts')->get();
             return response()->json(['data' => $posts], 200);
-        }catch(\Error){
+        }catch(Throwable $e){
+            report($e);
             return response()->json([
                 'message' => 'Une erreur est survenue lors de la récupération des annonces.',
             ], 500);

@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 
 class CreatePostController extends Controller
@@ -27,10 +28,11 @@ class CreatePostController extends Controller
             return response()->json([
                 'message' => 'Annonce crée avec succès!',
                 'data' => $post], 200);
-        } catch (\Error) {
+        } catch (Throwable $e) {
+            report($e);
             return response()->json([
                 'message' => 'Une erreur est survenue lors de la création de votre annonce!',
-                'token' => null], 500);
+                ], 500);
 
         }
     }
