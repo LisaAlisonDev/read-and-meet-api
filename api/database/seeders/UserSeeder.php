@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
 
         DB::table('user_profiles')->insert([
             'user_id' => $user->id,
+            'avatar' =>'',
             'description' => Str::random(100),
             'favourite_book' => Str::random(10),
             'visibility' => 0,

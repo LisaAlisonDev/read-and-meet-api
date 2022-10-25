@@ -14,6 +14,7 @@ class CreateProfileController extends Controller
     {
         try {
             UserProfile::create([
+                'avatar'=> "https://api.adorable.io/avatars/400/57842e83b9fcd9ae0d741cec40c47734.png",
                 'user_id' => $id,
                 'description' => "",
                 'favourite_book' => "",
