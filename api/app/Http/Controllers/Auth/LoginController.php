@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'message' => 'Bienvenue ' . Auth::user()->name . ' !',
-                'user' => auth()->user(),
+                'user' => new UserResource(auth()->user()),
                 'token' => $token,
                 'valid' => auth()->check()], 200);
         }catch (\Throwable $e){

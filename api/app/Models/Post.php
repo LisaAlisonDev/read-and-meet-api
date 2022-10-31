@@ -19,7 +19,7 @@ class Post extends Model
         'user_id',
         'title',
         'description',
-        'visibility'
+        'visibility',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
