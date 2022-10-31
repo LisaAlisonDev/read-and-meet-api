@@ -12,13 +12,13 @@ class CreateProfilePictureController extends Controller
     /**
      * Creation of user picture profile
      */
-    public function store(Request $request): \Illuminate\Http\JsonResponse
+    public function store($profileId, $name, $filepath): \Illuminate\Http\JsonResponse
     {
         try {
             $picture = ProfilePicture::create([
-                'profile_id' => $request->profileId,
-                'name' => $request->name,
-                'filepath' => $request->filepath,
+                'profile_id' => $profileId,
+                'name' => $name,
+                'filepath' => $filepath,
             ]);
 
             return response()->json([

@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UploadImageController;
 use App\Http\Controllers\Post\CreatePostController;
 use App\Http\Controllers\Post\PostsController;
 use App\Http\Controllers\Post\RemovePostController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Post\UpdatePostController;
 use App\Http\Controllers\User\Picture\CreateProfilePictureController;
 use App\Http\Controllers\User\Picture\RemoveProfilePictureController;
 use App\Http\Controllers\User\Picture\ShowProfilePicturesController;
+use App\Http\Controllers\User\Profile\UpdateProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,11 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->name('show.profile.pictures');
     Route::post('/profile-picture/remove/{id}',[RemoveProfilePictureController::class, 'remove'])
         ->name('remove.profile.picture');
+
+    Route::put('/profile/{id}', [UpdateProfileController::class, 'update'])
+        ->name('update.profile');
+    Route::post('/upload/image/{id}', [UploadImageController::class, 'store'])
+        ->name('upload.image');
 
     Route::post('/post', [CreatePostController::class, 'store'])
         ->name('create.post');
