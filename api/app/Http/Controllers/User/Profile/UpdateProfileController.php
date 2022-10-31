@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,18 +18,22 @@ class UpdateProfileController extends Controller
     public function update (Request $request, $id): \Illuminate\Http\JsonResponse
     {
         try {
-            $post = DB::table('userProfiles')
+             DB::table('user_profiles')
                 ->where('id', $id)
                 ->update([
                     'user_id' => Auth::id(),
-                    'favourite_book' => $request->title,
+                    'avatar'  => $request->avatar,
+                    'favourite_book' => "",
                     'description' => $request->description,
                     'visibility' => $request->visibility,
                 ]);
 
+            $profile = DB::table('user_profiles')
+                ->where('id', $id)->get();
+
             return response()->json([
                 'message' => 'Annonce mise à jour avec succès!',
-                'data' => $post], 200);
+                'data' => $profile], 200);
         } catch (\Error) {
             return response()->json([
                 'message' => 'Une erreur est survenue lors de la mise à jour de votre annonce!',
